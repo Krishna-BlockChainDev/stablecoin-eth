@@ -15,8 +15,11 @@
 //const { ethers, upgrades } = require("hardhat");
 const { ethers, defender } = require("hardhat");
 async function main() {
-    const MyCoin = await ethers.getContractFactory("MyCoin");
-    const coin = await defender.deployProxy(MyCoin, ['0x2F55DD964207ce40c0D64dfdEfCeEBd33931C2a6', '0x2F55DD964207ce40c0D64dfdEfCeEBd33931C2a6', '0x2F55DD964207ce40c0D64dfdEfCeEBd33931C2a6', '0x2F55DD964207ce40c0D64dfdEfCeEBd33931C2a6'], { kind: 'uups' });
+    //const MyCoin = await ethers.getContractFactory("MyCoin");
+    const MyCoin = await ethers.getContractFactory("MyToken");
+    //const coin = await defender.deployProxy(MyCoin, ['0x2F55DD964207ce40c0D64dfdEfCeEBd33931C2a6', '0x2F55DD964207ce40c0D64dfdEfCeEBd33931C2a6', '0x2F55DD964207ce40c0D64dfdEfCeEBd33931C2a6', '0x2F55DD964207ce40c0D64dfdEfCeEBd33931C2a6'], { kind: 'uups' });
+    const coin = await defender.deployContract(MyCoin, ['0x915f7dE2E55889b7E705e72Ff79ef4ed14fC18a3', '0x915f7dE2E55889b7E705e72Ff79ef4ed14fC18a3', '0x915f7dE2E55889b7E705e72Ff79ef4ed14fC18a3']);
+    //await coin.deployed();
     await coin.waitForDeployment();
     console.log("coin deployed to : ", await coin.getAddress());
 }
